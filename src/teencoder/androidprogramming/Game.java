@@ -27,8 +27,7 @@ import java.util.Random;
 
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -67,12 +66,22 @@ public class Game extends Activity implements OnClickListener
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) 
-    {
+    {    	
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
+        Bundle bun = getIntent().getExtras();
+    	
+    	playerName = bun.getString("Name");
+    	difficultyLevel = bun.getInt("Difficulty");
+    	numMoles = bun.getInt("Moles");
+    	duration=bun.getInt("Duration");
+    	
         initButtons();
         setNewMole();
         setTimer(difficultyLevel*1000);
+        
+        TextView tvName=(TextView)findViewById(R.id.playerName);
+    	tvName.setText("Player Name: " +playerName);  
     }
     
      
